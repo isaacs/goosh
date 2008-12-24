@@ -31,30 +31,10 @@ goosh.modules.register = function(name,base){
        'goosh.modules.list["'+name+'"] = goosh.modobj.'+name+";");
 }
 
-<?
-include("goosh/module/web.js");
+<?php
 
-
-if ($handle = opendir('goosh/module')) {
-    while (false !== ($file = readdir($handle))) {
-        if($file[0] != "." && $file != "web.js") include("goosh/module/".$file); //echo "$file\n";
-    }
-
-    closedir($handle);
-}
-
-if ($handle = opendir('goosh/module-exp')) {
-    while (false !== ($file = readdir($handle))) {
-        if($file[0] != "." && $file != "web.js") include("goosh/module-exp/".$file); //echo "$file\n";
-    }
-
-    closedir($handle);
-}
-
-
+gooshload("module/web.js");
+gooshload("module/*.js");
+gooshload("module-exp/*.js");
 
 ?>
-
-
-
-

@@ -1,19 +1,35 @@
 var goosh = new Object();
 goosh.lib = new Object();
 
-<?
- include("goosh/lib/namespace.js");
- include("goosh/lib/in_array.js");
- include("goosh/lib/chop.js");
- include("goosh/lib/get.js");
- include("goosh/lib/cookie.js");
- include("goosh/lang/lang.js");
- include("goosh/gui/gui.js");
- include("goosh/set/set.js");
- include("goosh/ajax/ajax.js");
- include("goosh/config/config.js");
- include("goosh/lib/keyboard.js");
- include("goosh/modules/modules.js");
+<?php
+
+function gooshload ($glob) {
+	static $included = array();
+	foreach (glob(dirname(__FILE__) . "/$glob") as $f) {
+		if (
+			in_array($f, $included) || !realpath($f)
+		) continue;
+		$included[] = $f;
+	
+		echo "\n/*** $f ***/\n";
+		include($f);
+		echo "\n/*** end $f ***/\n";
+	}
+}
+
+gooshload("lib/namespace.js");
+gooshload("lib/in_array.js");
+gooshload("lib/chop.js");
+gooshload("lib/get.js");
+gooshload("lib/cookie.js");
+gooshload("lang/lang.js");
+gooshload("gui/gui.js");
+gooshload("set/set.js");
+gooshload("ajax/ajax.js");
+gooshload("config/config.js");
+gooshload("lib/keyboard.js");
+gooshload("modules/modules.js");
+
 ?>
 
 
